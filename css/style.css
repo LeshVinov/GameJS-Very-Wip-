@@ -1,3 +1,32 @@
+*,*::after,*::before {
+    margin: 0;
+    padding: 0;
+}
+html {
+    background: url('../img/99px_ru_wallpaper_8430_snejnie_gornie_vershini_torchat_skvoz_oblaka.jpg') bottom center/cover;
+}
 .container {
     position: relative;
+}
+#rg-hero {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.escape-screen {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+}
+.container-for-text {
+    display: flex;
+    justify-content: center;
+    padding-top: 20%;
+}
+.escape-screen__text {
+    font-size: 6rem;
+    color: rgb(228, 148, 45);
+    z-index: 1;
 }
