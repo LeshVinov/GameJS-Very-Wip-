@@ -30,3 +30,7 @@ html {
     color: rgb(228, 148, 45);
     z-index: 1;
 }
+.timer {
+    position: absolute;
+    right: 20%;
+}
