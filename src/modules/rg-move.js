@@ -6,41 +6,51 @@ const movementModule = () => {
     let yPosition = 0
 
     const pause = () => {
-        document.addEventListener('keydown', function(event) {
-            if (event.code == 'Escape') {
-                if (escapeCount == 0) {
-                    escapeScreen.style.display="block" 
-                    escapeCount = 1
-                } else {
-                    escapeScreen.style.display="none"
-                    escapeCount = 0
-                }
-            }
-          })
+        if (escapeCount == 0) {
+            escapeScreen.style.display="block" 
+            escapeCount = 1
+
+        } else {
+            escapeScreen.style.display="none"
+            escapeCount = 0
+        }
     }
 
-    pause()
-    
-    document.addEventListener('keydown', function(event) {
+    const movement = (event) => {
         if (event.code == 'ArrowUp') {
             // console.log('Гослинг идёт вверх');
-            yPosition = +yPosition - 10
+            yPosition = +yPosition - 20
             hero.style.top= yPosition+'px'
         } else if (event.code == 'ArrowRight') {
             // console.log('Гослинг идёт вправо'); 
-            xPosition = +xPosition + 10
+            xPosition = +xPosition + 20
             hero.style.left= xPosition+'px'
             hero.style.transform='scale(-1,1)'
         } else if (event.code == 'ArrowDown') {
             // console.log('Гослинг идёт вниз');
-            yPosition = +yPosition + 10
+            yPosition = +yPosition + 20
             hero.style.top= yPosition+'px'
         } else if (event.code == 'ArrowLeft') {
             // console.log('Гослинг идёт влево');
-            xPosition = +xPosition - 10
+            xPosition = +xPosition - 20
             hero.style.left= xPosition+'px'
             hero.style.transform='scale(1,1)'
+        } else if (event.code == 'Escape') {
+            if (escapeCount == 0) {
+                document.removeEventListener('keydown', movement)
+                console.log(1);
+                pause()
+            } else  {
+                document.addEventListener('keydown', movement)
+                console.log(2);
+                pause()
+            }
         }
-      });
+    }
+
+
+
+    document.addEventListener('keydown', movement)
+
 }
 export default movementModule
