@@ -1,4 +1,4 @@
-import mainModule from "./modules/rg-move"
+import mainModule from "./modules/mainModule"
 // import timerModule from "./modules/timer"
 
 mainModule()
