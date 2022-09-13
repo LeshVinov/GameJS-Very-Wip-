@@ -1,18 +1,57 @@
-const movementModule = () => {
+import scoreFunc from "./score"
+
+const mainModule = () => {  
+
+    const h1 = document.getElementsByTagName('h1')[0];
+
     const hero = document.getElementById("rg-hero")
     const escapeScreen = document.querySelector('.escape-screen')
     let escapeCount = 0
     let xPosition = 0
     let yPosition = 0
 
+    let scoreOn = true
+
+    let sec = 0;
+    let min = 0;
+    let hrs = 0;
+    let t;
+    
+    function tick(){
+        sec++;
+        if (sec >= 60) {
+            sec = 0;
+            min++;
+            if (min >= 60) {
+                min = 0;
+                hrs++;
+            }
+        }
+    }
+    function add() {
+        tick();
+        h1.textContent = (hrs > 9 ? hrs : "0" + hrs) 
+                 + ":" + (min > 9 ? min : "0" + min)
+                    + ":" + (sec > 9 ? sec : "0" + sec);
+        timer();
+    }
+    function timer() {
+        t = setTimeout(add, 1000);
+    }
+    
+    timer();
+
     const pause = () => {
         if (escapeCount == 0) {
             escapeScreen.style.display="block" 
             escapeCount = 1
-
+            clearTimeout(t)
+            scoreOn = false
         } else {
             escapeScreen.style.display="none"
             escapeCount = 0
+            timer()
+            
         }
     }
 
@@ -38,19 +77,30 @@ const movementModule = () => {
         } else if (event.code == 'Escape') {
             if (escapeCount == 0) {
                 document.removeEventListener('keydown', movement)
-                console.log(1);
                 pause()
             } else  {
                 document.addEventListener('keydown', movement)
-                console.log(2);
                 pause()
             }
         }
     }
-
-
-
     document.addEventListener('keydown', movement)
+    
+    if(!scoreOn)  {
+        return false 
+    } else {
+        scoreFunc()
+    }
+
+    document.addEventListener('click', (e) => {
+        if (e.target == document && escapeCount == 1) {
+            escapeCount = 0
+            pause()
+        } else {
+            document.addEventListener('keydown', movement)
+        }
+    })
+
 
 }
-export default movementModule
+export default mainModule

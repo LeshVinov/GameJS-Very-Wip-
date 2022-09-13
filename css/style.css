@@ -8,6 +8,10 @@ html {
 .container {
     position: relative;
 }
+.container-for-funcs {
+    display: flex;
+    flex-direction: row;
+}
 #rg-hero {
     position: absolute;
     top: 0;
@@ -45,3 +49,24 @@ html {
     border: 3px solid rgb(32, 53, 148);
     border-radius: 20px;
 }
+.score {
+    padding: 5px 10px;
+    display: flex;
+    position: absolute;
+    right: 20%;
+    background: rgb(18, 184, 235);
+    border: 3px solid rgb(32, 53, 148);
+    border-radius: 20px;
+}
+.score__text {
+    font-weight: bold;
+    color: rgb(32, 53, 148);
+    font-size: 32px;
+    margin-right: 20px;
+}
+.score__number {
+    font-weight: bold;
+    color: rgb(32, 53, 148);
+    font-size: 32px;
+}
+    
