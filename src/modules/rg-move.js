@@ -41,17 +41,27 @@ const mainModule = () => {
     
     timer();
 
-    const pause = () => {
-        if (escapeCount == 0) {
-            escapeScreen.style.display="block" 
-            escapeCount = 1
-            clearTimeout(t)
-            scoreOn = false
-        } else {
-            escapeScreen.style.display="none"
-            escapeCount = 0
-            timer()
+    // const pause = () => {
+    //     if (escapeCount == 0) {
+    //         escapeScreen.style.display="block" 
+    //         escapeCount = 1
+    //         clearTimeout(t)
+    //         scoreOn = false
+    //     } else {
+    //         escapeScreen.style.display="none"
+    //         escapeCount = 0
+    //         timer()
             
+    //     }
+    // }
+
+    const start = (e) => {
+        if (e.key === 'Escape') {
+            document.removeEventListener('keydown', start)
+            escapeScreen.style.display = "none"
+            timer();
+            document.addEventListener('keydown', movement)
+            // scoreFunc()
         }
     }
 
@@ -75,31 +85,31 @@ const mainModule = () => {
             hero.style.left= xPosition+'px'
             hero.style.transform='scale(1,1)'
         } else if (event.code == 'Escape') {
-            if (escapeCount == 0) {
-                document.removeEventListener('keydown', movement)
-                pause()
-            } else  {
-                document.addEventListener('keydown', movement)
-                pause()
-            }
+            document.removeEventListener('keydown', movement)
+            clearTimeout(t)
+            scoreOn = false
+            console.log(scoreOn);
+            escapeScreen.style.display = 'block'
+            document.addEventListener('keydown', start)
+            
         }
     }
     document.addEventListener('keydown', movement)
-    
-    if(!scoreOn)  {
-        return false 
-    } else {
-        scoreFunc()
-    }
 
-    document.addEventListener('click', (e) => {
-        if (e.target == document && escapeCount == 1) {
-            escapeCount = 0
-            pause()
-        } else {
-            document.addEventListener('keydown', movement)
-        }
-    })
+    // if(!scoreOn)  {
+    //     return false 
+    // } else {
+    //     scoreFunc()
+    // }
+
+    // document.addEventListener('click', (e) => {
+    //     if (e.target == document && escapeCount == 1) {
+    //         escapeCount = 0
+    //         pause()
+    //     } else {
+    //         document.addEventListener('keydown', movement)
+    //     }
+    // })
 
 
 }
